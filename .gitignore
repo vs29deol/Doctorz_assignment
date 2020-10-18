@@ -41,7 +41,6 @@ yarn-debug.log*
 .yarn-integrity
 .rbenv-gemsets
 .ruby-version
-.rspec
 /log
 /tmp
 /db/*.sqlite3
