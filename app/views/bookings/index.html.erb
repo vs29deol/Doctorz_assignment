@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bookings</h1>
+
+<% if @bookings.count > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Show Number</th>
+        <th>Seat Numbers</th>
+        <% if @current_user.is_admin %>
+          <th>User Name</th>
+        <% end %>
+        <th>Sub Total</th>
+        <th>Service Tax</th>
+        <th>Swachh Bharat Cess</th>
+        <th>Krishi Kalyan Cess</th>
+        <th>Total</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.show.name %></td>
+          <td><%= Seat.find(booking.seat_ids).map{|seat| seat.name}.join(' , ') %></td>
+          <% if @current_user.is_admin %>
+            <td><%= booking.user.email %></td>
+          <% end %>
+          <td><%= booking.sub_total %></td>
+          <td><%= booking.service_tax %></td>
+          <td><%= booking.swachh_bharat_cess %></td>
+          <td><%= booking.krishi_kalyan_cess %></td>
+          <td><%= booking.total %></td>
+          <td><%= link_to 'Show', booking %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<br>
+
+<%= button_to "Book New Show", new_booking_path, :method => :get %>
+
+<br>
+
+<div>
+  <% if !@current_user.is_admin %>
+    <h3 style="color: red">**Login as admin to check Theater Revenue</h3>
+    <h4 style="color: green">**Admin email : user@gmail.com</h4>
+    <h4 style="color: green">**Admin password : 123456</h4>
+  <% else %>
+    <%= button_to "Theater Revenue", theatre_revenue_bookings_path, :method => :get %>
+  <% end %>
+</div>

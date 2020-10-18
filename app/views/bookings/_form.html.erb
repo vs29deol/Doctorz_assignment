@@ -1,0 +1,53 @@
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+        <% booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <h3>Available Seats:</h3>
+    <table>
+      <% count = 0 %>
+      <% @seats_available_to_book.map do |available_seats|%>
+        <tr>
+          <td>For Show <%= 1+count %> :</td>
+          <td>
+            <% if available_seats.nil? %>
+              <h5>No Seats are available</h5>
+            <% else %>
+              <%= available_seats.map{|seat| seat.name}.join(" , ") %>
+            <% end %>
+          </td>
+        </tr>
+        <% count += 1 %>
+      <% end %>
+    </table>
+  </div>
+
+  <h3>Fill the form below to book your show:</h3>
+
+  <div class="field">
+    <%= form.label :Select_Show_No %>
+    <%= form.select :show_id, @shows.collect { |show| [show.name, show.id] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Enter_Seats %>
+    <%= form.text_field :seat_names, placeholder: "Eg. A1,A2,B1" %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :user_id, value:current_user.id, hidden: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
