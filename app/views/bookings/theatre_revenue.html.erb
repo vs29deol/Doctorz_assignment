@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Total Sales:</h3>
+<p>
+  <strong>Revenue:</strong>
+  <%= @bookings.sum(:sub_total) %>
+</p>
+
+<p>
+  <strong>Service Tax:</strong>
+  <%= @bookings.sum(:service_tax) %>
+</p>
+
+<p>
+  <strong>Swachh Bharat Cess:</strong>
+  <%= @bookings.sum(:swachh_bharat_cess) %>
+</p>
+
+<p>
+  <strong>Krishi Kalyan Cess:</strong>
+  <%= @bookings.sum(:krishi_kalyan_cess) %>
+</p>
+
+<%= link_to 'Back', bookings_path %>

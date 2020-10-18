@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookMyShow</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- <p class="notice"><%= notice %></p> -->
+    <!-- <p class="alert"><%= alert %></p> -->
+    <!-- <%= link_to 'Sign In', new_user_session_path %> |
+    <%= link_to 'Sign Up', new_user_registration_path %> | -->
+    <div style="float: right; font-size: 20px;"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></div>
+    <%= yield %>
+  </body>
+</html>

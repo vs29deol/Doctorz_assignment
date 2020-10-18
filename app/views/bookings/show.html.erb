@@ -1,0 +1,40 @@
+<% if flash[:notice] %>
+  <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<p>
+  <strong>Show Number:</strong>
+  <%= @booking.show.name %>
+</p>
+
+<p>
+  <strong>Seat Numbers:</strong>
+  <%= Seat.find(@booking.seat_ids).map{|seat| seat.name}.join(' , ') %>
+</p>
+
+<p>
+  <strong>SubTotal:</strong>
+  <%= @booking.sub_total %>
+</p>
+
+<p>
+  <strong>Service Tax @14%:</strong>
+  <%= @booking.service_tax %>
+</p>
+
+<p>
+  <strong>Swachh Bharat Cess @0.5%:</strong>
+  <%= @booking.swachh_bharat_cess %>
+</p>
+
+<p>
+  <strong>Krishi Kalyan Cess @0.5%:</strong>
+  <%= @booking.krishi_kalyan_cess %>
+</p>
+
+<p>
+  <strong>Total Amount:</strong>
+  <%= @booking.total %>
+</p>
+
+<%= link_to 'Back', bookings_path %>
